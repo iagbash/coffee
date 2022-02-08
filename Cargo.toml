@@ -1,0 +1,26 @@
+[package]
+name = "coffee-grpc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+path = "./src/lib.rs"
+
+[[bin]]
+name="server"
+path="./src/server.rs"
+
+[[bin]]
+name="client"
+path="./src/client.rs"
+
+[dependencies]
+tonic = "0.6"
+prost = "0.9"
+tonic-reflection = "0.3.0"
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread"] }
+
+[build-dependencies]
+tonic-build = "0.6"

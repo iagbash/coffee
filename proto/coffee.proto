@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package Coffee;
+
+service BeanCommandService {
+  rpc StoreBeans(BeansRequest) returns (Empty){}
+  rpc ValidateBeans(BeansRequest) returns (Empty) {}
+}
+
+message BeansRequest {
+  string beanOrigin = 1;
+  uint64 amount = 3;
+}
+
+message Empty{}
