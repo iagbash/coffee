@@ -1,6 +1,7 @@
 pub mod kafka;
 pub mod config;
 
+use std::borrow::Borrow;
 use std::sync::Arc;
 use rdkafka::ClientConfig;
 use tonic::transport::Server;
@@ -22,9 +23,8 @@ pub struct MyServer {}
 impl BeanCommandService for MyServer {
     async fn store_beans(&self, _req: Request<BeansRequest>) -> Result<Response<Empty>, Status> {
         let req = _req.into_inner();
-        let mut buffer = BytesMut::with_capacity(123);
+        let mut buffer = BytesMut::with_capacity(req.encoded_len());
         req.encode(&mut buffer).unwrap();
-
 
         let app_config = Arc::new(Config {
             debug: false,
